@@ -1,0 +1,18 @@
+
+
+//@version=5
+indicator("STDDEV Filter")
+
+period_1 = input(20, "stddev_period_1")
+period_2 = input(50, "stddev_period_2")
+
+STDDEV_1 = ta.stdev(close, period_1)
+STDDEV_2 = ta.stdev(close, period_2)
+
+color stddev_up = input.color(color.blue, "stddev_up")
+color stddev_down = input.color(color.black, "stddev_down")
+color color_swap = STDDEV_1>STDDEV_2 ? stddev_up : stddev_down
+
+stddev_bias = (STDDEV_1 - STDDEV_2)
+
+plot(stddev_bias, "Filter-STDDEV", color_swap, 5, plot.style_histogram)

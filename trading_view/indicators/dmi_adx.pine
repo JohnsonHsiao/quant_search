@@ -1,0 +1,13 @@
+
+
+//@version=5
+indicator("DMI & ADX")
+
+period = input(20, "period")
+smooth_p = input(20, "smooth_p")
+
+[di_plus, di_minus, adx] = ta.dmi(period, smooth_p)
+
+plot(adx, "adx",color.yellow)
+plot(di_plus, "di_plus",color.green)
+plot(di_minus, "di_minus",color.red)

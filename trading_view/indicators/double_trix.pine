@@ -1,0 +1,14 @@
+
+//@version=5
+indicator("DTX")
+
+p1 = input(20, "p1")
+p2_factor = input(40, "p2_factor")
+p2 = p1 + p2_factor
+
+trix_1 = 10000 * ta.change(ta.ema(ta.ema(ta.ema(math.log(close), p1), p1), p1))
+trix_2 = 10000 * ta.change(ta.ema(ta.ema(ta.ema(math.log(close), p2), p2), p2))
+
+plot(trix_1, "trix_1",color.red)
+plot(trix_2, "trix_2",color.yellow)
+hline(0, '0', color.white)

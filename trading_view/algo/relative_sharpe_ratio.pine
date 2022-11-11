@@ -1,0 +1,28 @@
+
+
+//@version=5
+indicator("Relative Sharpe Ratio")
+
+return_measure_period = input(20, 'return_measure_period')
+
+baseline_price = close[return_measure_period]
+
+simple_return = close/close[1] - 1.0
+
+simple_return_period_sum = math.sum(simple_return, return_measure_period)
+
+stddev = ta.stdev(simple_return, return_measure_period)
+
+variance = stddev * stddev
+
+relative_cum_return = close/baseline_price - 1.0
+
+sharpe_ratio_single_return = (simple_return_period_sum/variance) 
+
+sharpe_ratio_relative = (relative_cum_return/variance) 
+
+plot(sharpe_ratio_single_return, "sharpe_ratio", color.blue)
+
+plot(sharpe_ratio_relative, "sharpe_ratio", color.yellow)
+
+hline(0.0, 'Base Line', color.white)

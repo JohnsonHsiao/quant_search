@@ -1,0 +1,59 @@
+indicator("DMI Improve")
+
+//@version=5
+indicator("DMI Improve")
+
+//It is good that this strategy is much more sensitive than the old one.
+
+
+ma_p = input(9, "ma_p")
+var_p = input(15, "var_p")
+adx_p = input(10, "adx_p")
+weight=input(10,"weight")
+
+
+
+
+sma_1 = ta.sma(close, ma_p)
+sma_2= ta.sma(close, adx_p)
+sma_3= ta.sma(close, 3)
+var_constant = ta.variance(close, var_p) 
+
+
+
+plus_DM_improve = 0.000001
+minus_DM_improve = 0.000001
+
+if (high - high[1])>0
+    plus_DM_improve := (high - high[1])* (1 + weight*(high - sma_1)/sma_1)
+
+   
+
+if (low[1] - low)>0
+    minus_DM_improve := (low[1] - low)* (1 + weight*(sma_1 - low)/sma_1)
+
+   
+    
+    
+pplus_DM_improve= ta.ema(plus_DM_improve, ma_p)
+mminus_DM_improve= ta.ema(minus_DM_improve, ma_p)
+vvar_constant= ta.ema(var_constant, ma_p)
+
+
+plus_DI_improve = pplus_DM_improve*10/vvar_constant 
+mius_DI_improve = mminus_DM_improve*10/vvar_constant 
+adx_improve = (ta.variance(close, adx_p)/sma_3)
+
+
+//plot(adx_improve, "adx",color.white)
+plot(plus_DI_improve, "di_plus",color.green)
+plot(mius_DI_improve, "di_minus",color.red)
+
+
+//the improving indicator's signal is slightly earier than the old one. Thus, the improving one is more accurate than the old one.
+//I think the best way to prove if the improving one is better is to backtest it.
+
+
+//this strategy must use stop loss and profit
+//when both positive and negative indicator value are small which means the momentum is small, exit the trade.
+//adx can't plot in the same chart with  other two indicators ,cuz the scale is different.

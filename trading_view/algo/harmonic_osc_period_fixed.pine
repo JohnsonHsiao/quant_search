@@ -1,0 +1,40 @@
+
+
+//@version=5
+
+Harmonic_period = input(20, "Harmonic_period")
+
+ma_period = input(5, "ma_period")
+
+ekin_factor = 
+epot_factor = 
+
+base_close = close[Harmonic_period]
+ema = ta.ema(close, Harmonic_period)
+
+kinetic_energy = 0.5 * 0.5 * ((base_close/close) * (base_close/close))
+potential_energy = 0.5 * 0.5 * (close/ema)
+
+total_energy = kinetic_energy + potential_energy
+total_energy_ma = ta.sma(total_energy, Harmonic_period)
+total_energy_stddev = ta.stdev(total_energy, Harmonic_period)
+total_energy_zscore = (total_energy - total_energy_ma)/total_energy_stddev
+
+total_energy_zscore_sma = ta.sma(total_energy_zscore, ma_period)
+
+// plot(kinetic_energy, "kinetic_energy", color.orange)
+// plot(potential_energy, "potential_energy", color.blue)
+plot(total_energy_zscore, "total_energy_zscore", color.fuchsia)
+plot(total_energy_zscore_sma, "total_energy_zscore_sma", color.lime)
+
+
+hline(0, 'base_line', color.white)
+
+hline(1, 'level-1', color.red)
+hline(-1, 'level-1', color.red)
+
+hline(2, 'level-2', color.red)
+hline(-2, 'level-2', color.red)
+
+hline(3, 'level-3', color.red)
+hline(-3, 'level-3', color.red)

@@ -1,0 +1,16 @@
+
+
+//@version=5
+indicator("Price_Oscillator")
+
+fast_len = input(20, 'fast_len')
+slow_len_factor = input(40, 'slow_len_factor')
+
+sma_1 = ta.sma(close, fast_len)
+sma_2 = ta.sma(close, (fast_len + slow_len_factor))
+
+oscillator = sma_1 - sma_2
+base = 0.0
+
+plot(oscillator, "oscillator",color.rgb(76, 175, 80))
+hline(base, 'base', color.rgb(255, 255, 255))

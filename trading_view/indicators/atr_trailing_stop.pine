@@ -1,0 +1,31 @@
+
+
+//@version=5
+indicator(title="ATR Trailing Stop", shorttitle="ATR Trailing Stop", overlay=true, timeframe="", timeframe_gaps=false)
+
+ATRPeriod = input.int(12, "ATR Period")
+ATRMultiplier = input.float(3, "ATR Multiplier", step=.1, tooltip = "This is the multiple of the ATR average that will function as the trail.")
+
+ATR = ta.atr(ATRPeriod)
+Stop = ATRMultiplier*ATR
+
+var ATRTrailingStop = 0.0
+ATRTrailingStop := if close>ATRTrailingStop[1] and close[1]>ATRTrailingStop[1]
+    math.max(ATRTrailingStop[1], close-Stop)
+else if close<ATRTrailingStop[1] and close[1]<ATRTrailingStop[1]
+    math.min(ATRTrailingStop[1], close+Stop)
+else if close>ATRTrailingStop[1]
+    close-Stop 
+else 
+    close+Stop
+
+var Position = 0.0
+Position := if close[1]<ATRTrailingStop[1] and close>ATRTrailingStop[1]
+    1
+else if close[1]>ATRTrailingStop[1] and close<ATRTrailingStop[1]
+    -1
+else
+    Position[1]
+
+PlotColor = Position == -1 ? color.red: Position == 1 ? color.green : color.white
+plot(ATRTrailingStop, color=PlotColor, linewidth=input(1, "Line Width"), title="ATR Trailing Stop")

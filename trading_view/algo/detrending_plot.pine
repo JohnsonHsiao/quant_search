@@ -1,0 +1,27 @@
+
+
+//@version=5
+indicator("Detrending_Plot")
+
+p_7 = input(7, "p_7")
+p_30 = input(30, "p_30")
+p_90 = input(90, "p_90")
+p_180 = input(180, "p_180")
+p_250 = input(250, "p_250")
+p_360 = input(360, "p_360")
+
+detrending_close_7 = close - close[p_7]
+detrending_close_30 = close - close[p_30]
+detrending_close_90 = close - close[p_90]
+detrending_close_180 = close - close[p_180]
+detrending_close_250 = close - close[p_250]
+detrending_close_360 = close - close[p_360]
+
+plot(detrending_close_7, "detrending_close_7",color.rgb(255, 82, 82))
+plot(detrending_close_30, "detrending_close_30",color.rgb(255, 235, 59))
+plot(detrending_close_90, "detrending_close_90",color.rgb(33, 150, 243))
+plot(detrending_close_180, "detrending_close_180",color.rgb(76, 175, 80))
+plot(detrending_close_250, "detrending_close_250",color.rgb(255, 152, 0))
+plot(detrending_close_360, "detrending_close_360",color.rgb(255, 255, 255))
+
+hline(0, 'Base Line', color.rgb(255, 255, 255))

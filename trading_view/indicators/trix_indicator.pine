@@ -1,0 +1,18 @@
+//@version=5
+indicator("triple exponentially average")
+
+//use 1 hour bar
+
+
+p = input(18, "p")
+
+ema1=ta.ema(close,p)
+ema2=ta.ema(ema1,p)
+ema3=ta.ema(ema2,p)
+
+trix=((ema3-ema3[1])/ema3[1])
+colortype=color.rgb(29,67,299,0)
+hline(-0.003, 'level', color.white)
+hline(0.003, 'level',color.white)
+hline(0, 'level',color.white)
+plot(trix,color=colortype)

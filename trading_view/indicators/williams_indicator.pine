@@ -1,0 +1,15 @@
+//@version=5
+indicator("williams inducator")
+
+p = input(14, "p")
+
+hp=ta.highest(high,p)
+lp=ta.lowest(low,p)
+
+denominator=hp-lp
+numerator=(hp-close)
+
+
+
+w = (numerator/denominator)*100
+plot(w)

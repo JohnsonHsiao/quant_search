@@ -1,0 +1,50 @@
+
+
+//@version=5
+indicator("Grid Level", overlay=true)
+
+rolling_period = input(50 , 'rolling_period')
+grid_gap = input(0.01, 'grid_gap')
+
+grid_base = ta.sma(close, rolling_period)
+
+u1 = grid_base * (1 + 0.5 * grid_gap)
+l1 = grid_base * (1 - 0.5 * grid_gap)
+u2 = grid_base * (1 + 1 * grid_gap)
+l2 = grid_base * (1 - 1 * grid_gap)
+u3 = grid_base * (1 + 1.5 * grid_gap)
+l3 = grid_base * (1 - 1.5 * grid_gap)
+u4 = grid_base * (1 + 2 * grid_gap)
+l4 = grid_base * (1 - 2 * grid_gap)
+u5 = grid_base * (1 + 2.5 * grid_gap)
+l5 = grid_base * (1 - 2.5 * grid_gap)
+u6 = grid_base * (1 + 3 * grid_gap)
+l6 = grid_base * (1 - 3 * grid_gap)
+u7 = grid_base * (1 + 3.5 * grid_gap)
+l7 = grid_base * (1 - 3.5 * grid_gap)
+u8 = grid_base * (1 + 4 * grid_gap)
+l8 = grid_base * (1 - 4 * grid_gap)
+u9 = grid_base * (1 + 4.5 * grid_gap)
+l9 = grid_base * (1 - 4.5 * grid_gap)
+u10 = grid_base * (1 + 5 * grid_gap)
+l10 = grid_base * (1 - 5 * grid_gap)
+
+
+
+plot(u1, 'u1', color.rgb(76, 175, 80))
+plot(l1, 'l1', color.rgb(76, 175, 80))
+plot(u2, 'u2', color.rgb(224, 64, 251))
+plot(l2, 'l2', color.rgb(224, 64, 251))
+plot(u3, 'u3', color.rgb(255, 235, 59))
+plot(l3, 'l3', color.rgb(255, 235, 59))
+plot(u4, 'u4', color.rgb(224, 64, 251))
+plot(l4, 'l4', color.rgb(224, 64, 251))
+plot(u5, 'u5', color.rgb(255, 235, 59))
+plot(l5, 'l5', color.rgb(255, 235, 59))
+plot(u6, 'u6', color.rgb(224, 64, 251))
+plot(l6, 'l6', color.rgb(224, 64, 251))
+plot(u7, 'u7', color.rgb(255, 235, 59))
+plot(l7, 'l7', color.rgb(255, 235, 59))
+plot(u8, 'u8', color.rgb(224, 64, 251))
+plot(l8, 'l8', color.rgb(224, 64, 251))
+plot(u9, 'u9', color.rgb(255, 235, 59))

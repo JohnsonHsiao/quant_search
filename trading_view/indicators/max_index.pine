@@ -1,0 +1,24 @@
+
+
+//@version=5
+indicator("Max_Index")
+
+rolling_max_min_p = input(20, 'rolling_max_min_p')
+rolling_p = input(20, 'rolling_p')
+mtm_break_gap = input(4, 'mtm_break_gap')
+
+rolling_max = ta.highest(close, rolling_max_min_p)
+rolling_min = ta.lowest(close, rolling_max_min_p)
+
+rolling_range = rolling_max - rolling_min
+
+rolling_range_ema1 = ta.ema(rolling_range, rolling_p)
+rolling_range_ema2 = ta.ema(rolling_range_ema1, rolling_p)
+
+rolling_range_ema_ratio = rolling_range_ema1/rolling_range_ema2
+
+max_index = math.sum(rolling_range_ema_ratio, rolling_p)
+
+plot(max_index, "max_index",color.orange)
+hline(rolling_p, 'rolling_p', color.white)
+hline(rolling_p+mtm_break_gap, 'rolling_p', color.red)

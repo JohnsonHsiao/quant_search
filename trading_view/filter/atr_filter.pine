@@ -1,0 +1,18 @@
+
+
+//@version=5
+indicator("ATR Filter")
+
+period_1 = input(20, "atr_period_1")
+period_2 = input(50, "atr_period_2")
+
+ATR_1 = (ta.atr(period_1)) 
+ATR_2 = (ta.atr(period_2)) 
+
+color atr_up = input.color(color.blue, "atr_up")
+color atr_down = input.color(color.black, "atr_down")
+color color_swap = ATR_1>ATR_2 ? atr_up : atr_down
+
+atr_bias = (ATR_1 - ATR_2)
+
+plot(atr_bias, "atr_filter", color_swap, 5, plot.style_histogram)

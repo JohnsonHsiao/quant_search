@@ -1,0 +1,16 @@
+indicator("Commodity channel index(CCI)")
+
+p = input(10, "p")
+
+tp=(close+high+low)/3
+ma=ta.sma(tp,p)
+dev=math.abs(tp-ma)
+md=ta.sma(dev,p)
+
+cci=(tp-ma)/(0.015*md)
+
+
+
+
+
+plot(cci)

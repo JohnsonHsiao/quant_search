@@ -1,0 +1,39 @@
+
+
+//@version=5
+
+indicator("Harmonic Osc")
+
+roc_p = input(20, "roc_p")
+ema_p = input(20, "ema_p")
+zscore_p  = input(20, "zscore_p")
+
+ekin_factor = roc_p/(roc_p+ema_p)
+epot_factor = ema_p/(roc_p+ema_p)
+
+base_close = close[roc_p]
+ema = ta.ema(close, ema_p)
+
+kinetic_energy = 0.5 * ekin_factor * ((base_close/close) * (base_close/close))
+potential_energy = 0.5 * epot_factor * (close/ema)
+
+
+total_energy = kinetic_energy + potential_energy
+total_energy_ma = ta.sma(total_energy, zscore_p)
+total_energy_stddev = ta.stdev(total_energy, zscore_p)
+total_energy_zscore = (total_energy - total_energy_ma)/total_energy_stddev
+
+
+// plot(kinetic_energy, "kinetic_energy", color.orange)
+// plot(potential_energy, "potential_energy", color.blue)
+plot(total_energy_zscore, "total_energy_zscore", color.yellow)
+hline(0, 'base_line', color.white)
+
+hline(1, 'level-1', color.blue)
+hline(-1, 'level-1', color.blue)
+
+hline(2, 'level-2', color.red)
+hline(-2, 'level-2', color.red)
+
+hline(3, 'level-3', color.purple)
+hline(-3, 'level-3', color.purple)

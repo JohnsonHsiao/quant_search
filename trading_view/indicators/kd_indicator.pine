@@ -1,0 +1,26 @@
+indicator("kd indicator")
+
+p = input(14, "p")
+
+hp=ta.highest(high,p)
+lp=ta.lowest(low,p)
+
+denominator=hp-lp
+numerator=(close-lp)
+rsv = (numerator/denominator)*100
+
+k=50.0
+d=50.0
+
+
+if time>= timestamp(syminfo.timezone,2016,5,20,0,0)
+    k:=(k[1]*(2/3))+(rsv*(1/3))
+    
+if time>= timestamp(syminfo.timezone,2016,5,20,0,0)
+
+    d:=(d[1]*(2/3))+(k*(1/3))
+
+colortype=color.rgb(2999,67,2899,0)
+colortype2=color.rgb(2999,667,2899,0)
+plot(k,color=colortype2)
+plot(d,color=colortype)
