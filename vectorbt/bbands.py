@@ -18,8 +18,8 @@ data['exit_long'] = np.where(data['entry_long'].shift(10) ,True, False)
 data['entry_short'] = np.where(data['close'] > data['upper'] ,True, False)
 data['exit_short'] = np.where(data['entry_short'].shift(10) ,True, False)  
 
-#this is example
 
+#this is eaxample
 pf = vbt.Portfolio.from_signals(
     sl_stop = 0.01,  #i'm not sure about this usage
     tp_stop = 0.01,  #i'm not sure about this usage
