@@ -1,0 +1,14 @@
+
+
+//@version=5
+indicator("Fisher Standardize Index")
+
+period = input(20, "Period")
+
+standardize_index = (close - ta.lowest(period))/(ta.highest(period) - ta.lowest(period))
+
+new_standardize_index = 2 * standardize_index - 1
+
+fisher_trans = 1/2 * (math.log10((1+new_standardize_index)/(1-new_standardize_index)))
+
+plot(fisher_trans)

@@ -1,0 +1,24 @@
+
+
+//@version=5
+indicator("Bband Pinch & Expand")
+
+band_p = input(20, "band_p1")
+std_bband = input(2, "std_bband")
+ma_p = input(20, "ma_p")
+
+[middle_1, upper_1, lower_1] = ta.bb(close, band_p, std_bband)
+
+band_width = (upper_1 - lower_1)
+
+band_width_ma = ta.sma(band_width, ma_p)
+
+band_width_diff = band_width - band_width_ma
+
+color bband_expand = input.color(color.red, "bband_expand")
+color bband_pinch = input.color(color.blue, "bband_pinch")
+color color_swap = band_width<band_width_ma ? bband_pinch : bband_expand
+
+plot(band_width_diff, "band_width_diff", color_swap, 2, plot.style_histogram)
+plot(band_width_ma, 'band_width_ma', color.green)
+hline(0, 'base_line', color.white)

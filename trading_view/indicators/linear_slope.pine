@@ -1,0 +1,17 @@
+
+
+//@version=5
+indicator("Linear Slope & Delta2")
+
+Linear_Reg_p = input(10, "Linear Regression Period")
+shift_p = input(10,"Slope Shift Period")
+Linear_Reg = ta.linreg(close, Linear_Reg_p, 0)
+
+Linear_Slope = (Linear_Reg - Linear_Reg[shift_p])/shift_p
+
+Linear_Slope_delta2 = (Linear_Slope - Linear_Slope[shift_p])/shift_p
+
+plot(Linear_Slope, "Linear Slope", color.red)
+plot(Linear_Slope_delta2, 'Linear Delta 2', color.yellow)
+
+hline(0, 'Base Line', color.white)

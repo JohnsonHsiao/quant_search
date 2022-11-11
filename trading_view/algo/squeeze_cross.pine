@@ -1,0 +1,23 @@
+
+
+//@version=5
+indicator("Squeeze Cross")
+
+sqz_period = input(20, 'sqz_period')
+sqz_width = input(4.0, 'sqz_width')
+sqz = ta.stdev(close, sqz_period) * sqz_width
+
+sqz_ratio = (close - ta.sma(close, sqz_period))/sqz
+
+middle = 0.0
+upper = 0.5
+lower = -0.5
+upper_top = 1.0
+lower_top = -1.0
+
+plot(sqz_ratio, "sqz_ratio",color.yellow)
+hline(middle, 'middle', color.rgb(255, 82, 82))
+hline(upper, 'upper', color.rgb(255, 255, 255))
+hline(lower, 'lower', color.rgb(255, 255, 255))
+hline(upper_top, 'upper', color.rgb(255, 152, 0))
+hline(lower_top, 'lower', color.rgb(255, 152, 0))

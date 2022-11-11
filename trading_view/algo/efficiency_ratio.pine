@@ -1,0 +1,29 @@
+
+
+
+//@version=5
+indicator("Efficiency Ratio")
+
+rolling_p = input(20, "rolling_p")
+level_gap_1 = input(0.5, "level_gap_1")
+level_gap_2_factor = input(0.5, "level_gap_2_factor")
+
+total_price_delta = close - close[rolling_p]
+
+price_delta = close - close[1]
+
+delta_sum_abs = total_price_delta
+
+delta_abs_sum = math.sum(math.abs(price_delta), rolling_p)
+
+efficiency_ratio = delta_sum_abs/delta_abs_sum
+
+plot(efficiency_ratio, "efficiency_ratio", color.green)
+
+hline(level_gap_1, 'momentum_level', color.red)
+hline(-level_gap_1, 'momentum_level', color.red)
+
+hline(level_gap_1+level_gap_2_factor, 'meanreversion_level', color.blue)
+hline(-level_gap_1-level_gap_2_factor, 'meanreversion_level', color.blue)
+
+hline(0.0, 'Lower', color.white)

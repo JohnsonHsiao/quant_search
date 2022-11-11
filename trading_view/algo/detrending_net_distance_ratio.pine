@@ -1,0 +1,40 @@
+//@version=5s
+indicator("Detrending Net Distance Ratio")
+
+p_7 = input(7, "p_7")
+p_14 = input(14, "p_14")
+p_30 = input(30, "p_30")
+p_50 = input(50, "p_50")
+p_90 = input(90, "p_90")
+p_180 = input(180, "p_180")
+p_200 = input(200, "p_200")
+p_250 = input(250, "p_250")
+p_300 = input(300, "p_300")
+p_360 = input(360, "p_360")
+
+detrending_close_7 = close - close[p_7]
+detrending_close_14 = close - close[p_14]
+detrending_close_30 = close - close[p_30]
+detrending_close_50 = close - close[p_50]
+detrending_close_90 = close - close[p_90]
+detrending_close_180 = close - close[p_180]
+detrending_close_200 = close - close[p_200]
+detrending_close_250 = close - close[p_250]
+detrending_close_300 = close - close[p_300]
+detrending_close_360 = close - close[p_360]
+
+// Net 
+net = detrending_close_7 + detrending_close_14 + detrending_close_30 + detrending_close_50 + detrending_close_90 + detrending_close_180 + detrending_close_200 + detrending_close_250 + detrending_close_300 + detrending_close_360
+
+// Abs
+abs = math.abs(detrending_close_7) + math.abs(detrending_close_14) + math.abs(detrending_close_30) + math.abs(detrending_close_50) + math.abs(detrending_close_90) + math.abs(detrending_close_180) + math.abs(detrending_close_200) + math.abs(detrending_close_250) + math.abs(detrending_close_300) + math.abs(detrending_close_360) 
+
+Net_Distance_Ratio = net/abs
+
+plot(Net_Distance_Ratio, "Net_Distance_Ratio",color.rgb(255, 82, 82))
+
+hline(0, 'Base Line', color.rgb(33, 150, 243))
+hline(0.5, 'Base Line', color.rgb(255, 255, 255))
+hline(-0.5, 'Base Line', color.rgb(255, 255, 255))
+hline(1.0, 'Base Line', color.rgb(255, 255, 255))
+hline(-1.0, 'Base Line', color.rgb(255, 255, 255))

@@ -1,0 +1,18 @@
+
+
+//@version=5
+indicator("ADX Expand")
+
+// ADX is for measurement of momentum not direction
+// can use this as a momentum filter
+adx_period = input(20, "adx_period")
+adx_smooth_p = input(1, "adx_smooth_p")
+adx_ma_expand_period = input(50, "adx_ma_expand_period")
+
+[di_plus, di_minus, adx] = ta.dmi(adx_period, adx_smooth_p)
+
+
+avg_adx = ta.sma(adx, adx_ma_expand_period)
+
+plot(adx, "adx",color.yellow)
+plot(avg_adx, "avg_adx",color.white)

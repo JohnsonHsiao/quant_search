@@ -1,0 +1,20 @@
+
+
+//@version=5
+indicator("Aroon[Rsi-Adjusted]")
+
+rolling_p = input(20, 'rolling period')
+
+RSI = ta.rsi(close, rolling_p)
+
+Aroon_Up = 100 * (ta.highestbars(close, rolling_p+1) + rolling_p)/rolling_p
+Aroon_Down = 100 * (ta.lowestbars(close, rolling_p+1) + rolling_p)/rolling_p
+
+Aroon_Up_RSI = 100 * (ta.highestbars(RSI, rolling_p+1) + rolling_p)/rolling_p
+Aroon_Down_RSI = 100 * (ta.lowestbars(RSI, rolling_p+1) + rolling_p)/rolling_p
+
+upper_spread = Aroon_Up - Aroon_Up_RSI
+lower_spread = Aroon_Down - Aroon_Down_RSI
+
+plot(upper_spread, "upper_spread",color.red)
+plot(lower_spread, "lower_spread",color.blue)

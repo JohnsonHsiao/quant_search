@@ -1,0 +1,25 @@
+
+
+//@version=5
+indicator("MTB_3", overlay=true)
+
+MTB_Period = input(20, "Multi_Band_Period")
+MTB_base = ta.sma(close, MTB_Period)
+MTB_band_unit = ta.stdev(close, MTB_Period)
+
+
+upper_10 = MTB_base + (1.0 * MTB_band_unit)
+upper_20 = MTB_base + (2.0 * MTB_band_unit)
+upper_30 = MTB_base + (3.0 * MTB_band_unit)
+
+lower_10 = MTB_base - (1.0 * MTB_band_unit)
+lower_20 = MTB_base - (2.0 * MTB_band_unit)
+lower_30 = MTB_base - (3.0 * MTB_band_unit)
+
+plot(upper_10, 'upper_10', color.yellow)
+plot(upper_20, 'upper_20', color.yellow)
+plot(upper_30, 'upper_30', color.yellow)
+
+plot(lower_10, 'lower_10', color.yellow)
+plot(lower_20, 'lower_20', color.yellow)
+plot(lower_30, 'lower_30', color.yellow)

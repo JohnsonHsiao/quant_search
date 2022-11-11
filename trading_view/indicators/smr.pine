@@ -1,0 +1,20 @@
+
+
+//@version=5
+indicator("SMR")
+
+rsi_period = input(20, "smooth_rsi_period")
+gap = input(10, "gap")
+
+rsi_1 = ta.rsi(close, rsi_period)
+rsi_2 = ta.rsi(rsi_1, rsi_period)
+smooth_rsi = ta.rsi(rsi_2, rsi_period)
+
+overbuy_level = 50.0 + gap
+oversell_level = 50.0 - gap
+
+plot(smooth_rsi, "Smooth_RSI", color.yellow)
+
+hline(overbuy_level, 'overbuy-level', color.red)
+hline(oversell_level, 'oversell-level', color.red)
+hline(50, 'mid', color.yellow)

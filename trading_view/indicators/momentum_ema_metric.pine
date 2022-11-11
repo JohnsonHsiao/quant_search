@@ -1,0 +1,19 @@
+
+
+//@version=5
+indicator("MTM Metric [EMA]")
+
+fast_p = input(20, "fast_p")
+mid_p = input(60, "mid_p")
+long_p  = input(180, "mid_p")
+
+fast_ema = ta.ema(close, fast_p)
+mid_ema = ta.ema(close, mid_p)
+long_ema = ta.ema(close, long_p)
+
+
+short_bias = fast_ema - mid_ema
+mid_bias = mid_ema - long_ema
+
+plot(short_bias, "short_bias", color.red,3, plot.style_histogram)
+plot(mid_bias, "mid_bias", color.yellow,3, plot.style_histogram)

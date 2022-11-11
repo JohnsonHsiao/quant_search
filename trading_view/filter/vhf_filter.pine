@@ -1,0 +1,18 @@
+//@version=5
+indicator("VHF indicator")
+
+//Vertical Horizontal Filter (VHF) is to identify trending and ranging markets.
+
+p = input(10, "p")
+
+hp=ta.highest(close,p)
+lp=ta.lowest(close,p)
+
+numerator=math.abs(hp-lp)
+
+source=math.abs(close-close[1])
+denominator=math.sum(source,p)
+
+vhf=(numerator/denominator)*100
+hline(20, 'VHF Level', color.white)
+plot(vhf,"p",color.red)

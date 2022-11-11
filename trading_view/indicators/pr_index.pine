@@ -1,0 +1,17 @@
+
+
+//@version=5
+indicator("PR_Index")
+
+PR_Index_Period = input(20, "PR_Index_Period")
+
+max_price = ta.highest(close, PR_Index_Period)
+min_price = ta.lowest(close, PR_Index_Period)
+
+
+PR_Index = (max_price - close)/(max_price - min_price)
+
+plot(PR_Index, "PR_Index",color.yellow)
+hline(0, '0', color.white)
+hline(0.5, '0.5', color.white)
+hline(1, '1.0', color.white)

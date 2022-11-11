@@ -1,0 +1,64 @@
+//@version=5
+
+
+// use the buy return  and  the sell return  curve to indicate the buy and sell point
+//how to define the buy return curve?
+//add different period of the lowest point minus current typical price 
+//the sell return curve is using the same fashion
+
+indicator("bias")
+
+
+p = input(3, "p")
+p2 = input(6, "p2")
+p3 = input(9, "p3")
+p4 = input(12, "p4")
+p5 = input(20, "p5")
+avg=input(10, "avg")
+
+[di_plus, di_minus, adx] = ta.dmi(p, p)
+
+
+tp=(close+high+low)/3
+hp=ta.highest(close,p)
+bias=((tp-hp)/hp)*100
+
+
+hp2=ta.highest(close,p2)
+bias2=((tp-hp2)/hp2)*100
+
+hp3=ta.highest(close,p3)
+bias3=((tp-hp3)/hp3)*100
+
+hp4=ta.highest(close,p4)
+bias4=((tp-hp4)/hp4)*100
+
+hp5=ta.highest(close,p5)
+bias5=((tp-hp5)/hp5)*100
+
+
+
+
+
+lp=ta.lowest(close,p)
+mbias=((lp-tp)/lp)*100
+
+lp2=ta.lowest(close,p2)
+mbias2=((lp2-tp)/lp2)*100
+
+lp3=ta.lowest(close,p3)
+mbias3=((lp3-tp)/lp3)*100
+
+lp4=ta.lowest(close,p4)
+mbias4=((lp4-tp)/lp4)*100
+
+lp5=ta.lowest(close,p5)
+mbias5=((lp5-tp)/lp5)*100
+
+
+plot(-(bias+bias2+bias3+bias4+bias5), "b",color.red)
+
+plot(-(mbias+mbias2+mbias3+mbias4+mbias5), "s",color.green)
+//plot(adx, "adx",color.white)
+
+hline(0, '0 Level', color.white)

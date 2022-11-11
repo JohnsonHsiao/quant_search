@@ -1,0 +1,20 @@
+
+
+//@version=5
+indicator(shorttitle="AB", title="Asymmetric Band", overlay=true)
+
+band_p = input(20, "band period")
+band_width = input(1.5, "band width")
+
+mid_ema = ta.ema(close, band_p)
+high_ema = ta.ema(high, band_p)
+low_ema = ta.ema(low, band_p)
+upper_stddev = ta.stdev(high_ema, band_p)
+lower_stddev = ta.stdev(low_ema, band_p)
+
+upper_band = high_ema + band_width * upper_stddev
+lower_band = low_ema - band_width * lower_stddev
+
+plot(upper_band, "AB-upper", color.blue)
+plot(mid_ema, "AB-mid", color.gray)
+plot(lower_band, "AB-lower", color.yellow)

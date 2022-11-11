@@ -1,0 +1,15 @@
+
+
+//@version=5
+indicator("DMI Direction")
+
+period = input(20, "period")
+smooth_p = input(20, "smooth_p")
+
+[di_plus, di_minus, adx] = ta.dmi(period, smooth_p)
+
+di_diff = di_plus - di_minus
+
+plot(di_diff, "di_diff", color.red,3, plot.style_histogram)
+
+hline(0.0, '0.0', color.white)

@@ -1,0 +1,19 @@
+
+
+//@version=5
+indicator("Vertical Horizontal Filter")
+
+period = input(10, "VHF period")
+level = input(0.2, "Gap for determine whether is Price Vertically Movement")
+
+gap = (ta.highest(close, period) - ta.lowest(close, period))
+change_sum = math.sum(math.abs(ta.change(close,period)), period)
+VHF = gap/change_sum
+
+color momentum = input.color(color.red, "momentum")
+color ranging = input.color(color.blue, "ranging")
+color color_swap = VHF>level ? momentum : ranging
+
+plot(VHF, "VHF",color_swap)
+
+hline(level, 'VHF Level', color.white)

@@ -1,0 +1,11 @@
+
+
+//@version=5
+indicator("ATR/Close Ratio")
+
+period = input(20, "input")
+volatility_gap  = input(5, "input")
+
+ATR_Close_Ratio = ((ta.atr(period))/close) * 100
+plot(ATR_Close_Ratio, "ATR_Close_Ratio", color.blue)
+hline(volatility_gap, 'volatility_gap', color.white)
